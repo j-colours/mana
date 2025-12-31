@@ -1,7 +1,11 @@
 # Asset Manager
-For Game Dev
+
+For Game Dev management to streamline the process of making and moving assets in game development
+processes on multiple platforms (OS Systems)
 
 # Instructions
-...
 
-Joshua Shrewsbury - shrewsburyj2@winthrop.edu
+Run ...
+
+Joshua Shrewsbury - <shrewsburyj2@winthrop.edu>
+
