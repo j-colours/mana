@@ -1,11 +1,10 @@
 # Asset Manager
 
-For Game Dev management to streamline the process of making and moving assets in game development
-processes on multiple platforms (OS Systems)
+For Dev management to streamline the process of making and moving assets in something like game development
+on multiple platforms (OS Systems).
 
 # Instructions
 
 Run ...
 
-Joshua Shrewsbury - <shrewsburyj2@winthrop.edu>
-
+jcolours - <shrewsburyj2@winthrop.edu>

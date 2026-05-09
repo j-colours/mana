@@ -1,2 +1,15 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
+# install script
+# Author: jcolours
+# Date: 2026-05-09
+# Description: install asset manager onto system
+
+if [[ $EUID -ne 0 ]]; then
+  printf "Please use sudo...\n"
+  exit 1 # failure status
+fi
+
+# logic down here
+
+exit 0 # success status

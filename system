@@ -2,11 +2,12 @@
 
 # pretty cool using exec but it automatically runs and exits which is not what we may want
 system_name() {
-    sys_name=$(uname -s)        # equivalent statement would be `uname -s`
-    os_name=`uname -o`
-    printf "%s\n" "$sys_name"
-    # equivalent to in this case with echo $sys_name
-    echo $os_name
+  sys_name=$(uname -s) # equivalent statement would be `uname -s`
+  os_name=$(uname -o)
+  printf "%s\n" "$sys_name"
+  # equivalent to in this case with echo $sys_name
+  echo $os_name
 }
 
 system_name
+
