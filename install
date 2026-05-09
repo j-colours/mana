@@ -5,7 +5,7 @@
 # Date: 2026-05-09
 # Description: install asset manager onto system
 
-if [[ $EUID -ne 0 ]]; then
+if [[ $EUID -ne 0 ]]; then # [[]] is safer and adds functionality compared to simple []
   printf "Please use sudo...\n"
   exit 1 # failure status
 fi
