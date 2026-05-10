@@ -8,7 +8,7 @@
 # Function Name: main
 # Purpose: runs manager
 main() {
-  echo "Placeholder here..."
+
   exit 0 # success status
 }
 
