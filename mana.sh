@@ -8,6 +8,7 @@
 # declare ANSI Escape Codes for colors
 RESET='\x1b[0m'
 RED='\x1b[31m'
+GREEN='\x1b[32m'
 
 # Function Name: single_file
 # Purpose: Whenever -s or --single flag is called run management for specfic file
@@ -30,10 +31,10 @@ single_file() {
 
   if [[ "$PREVIEW" == true ]]; then
     echo
-    echo "$FILE --> $TO_DIR"
+    echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
   else
     echo
-    echo "$FILE --> $TO_DIR"
+    echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
     mv "$FILE" "$TO_DIR"
   fi
 }
@@ -76,9 +77,9 @@ mult_files() {
   # read each file recursively found and move it to destination
   find "$DIR" -iname "*.$TYPE" | while read -r FILE; do
     if [[ "$PREVIEW" == true ]]; then
-      echo "$FILE --> $TO_DIR"
+      echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
     else
-      echo "$FILE --> $TO_DIR"
+      echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
       mv "$FILE" "$TO_DIR"
     fi
   done
@@ -99,8 +100,46 @@ preview_mult() {
 
 # Function Name: move_all
 # Purpose: -ma or --move-all moves everything in a directory into somewhere else
+# mana (-ma|--move-all) <directory> <new_directory>
 move_all() {
-  echo "Placeholer here..."
+  DIR=$1
+  TO_DIR=$2
+
+  if [[ ! -d "$DIR" ]]; then
+    echo -e "${RED}Error: Target Directory doesn't exist...${RESET}"
+    exit 1 # failure status
+  fi
+
+  if [[ ! -d "$TO_DIR" ]]; then
+    if [[ "$PREVIEW" == true ]]; then
+      echo
+      echo -e "${RED}CAUTION DESTINATION DOESN'T EXIST... MAKE SURE THIS IS THE DESTINATION WANTED FOR ACTUAL MOVE...${RESET}"
+    else
+      mkdir -p "$TO_DIR"
+    fi
+  fi
+
+  echo
+
+  find "$DIR" -type f -iname "*" | while read -r FILE; do
+    if [[ "$PREVIEW" == true ]]; then
+      echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
+    else
+      echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
+      mv "$FILE" "$TO_DIR"
+    fi
+  done
+}
+
+# Function Name: preview_all
+# Purpose: Whenever the flag -pa or --preview-all is used it only shows what move all would do
+# mana (-pa|--preview-all) <directory> <new_directory>
+preview_all() {
+  DIR=$1
+  TO_DIR=$2
+  PREVIEW=true
+
+  move_all "$DIR" "$TO_DIR" "$PREVIEW"
 }
 
 # Function Name: main
@@ -115,6 +154,12 @@ main() {
     ;;
   "-s" | "--single")
     single_file "$2" "$3" "$PREVIEW"
+    ;;
+  "-ma" | "--move-all")
+    move_all "$2" "$3"
+    ;;
+  "-pa" | "--preview-all")
+    preview_all "$2" "$3"
     ;;
   "-ps" | "--preview-single")
     preview_single "$2" "$3"
