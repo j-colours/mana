@@ -85,7 +85,7 @@ mult_files() {
   done
 }
 
-# Funciton Name: preview_mult
+# Function Name: preview_mult
 # Purpose: Whenever -pm or --preview-mult is called show what would happen if mult was used
 # without actually doing it
 # mana (-pm|--preview-mult) <directory> <file type/extension> <new_directory>
@@ -104,6 +104,7 @@ preview_mult() {
 move_all() {
   DIR=$1
   TO_DIR=$2
+  PREVIEW=$3
 
   if [[ ! -d "$DIR" ]]; then
     echo -e "${RED}Error: Target Directory doesn't exist...${RESET}"
@@ -113,7 +114,7 @@ move_all() {
   if [[ ! -d "$TO_DIR" ]]; then
     if [[ "$PREVIEW" == true ]]; then
       echo
-      echo -e "${RED}CAUTION DESTINATION DOESN'T EXIST... MAKE SURE THIS IS THE DESTINATION WANTED FOR ACTUAL MOVE...${RESET}"
+      echo -e "${RED}CAUTION:${RESET} Destination doesn't exist. This will be created on actual move."
     else
       mkdir -p "$TO_DIR"
     fi
@@ -121,7 +122,7 @@ move_all() {
 
   echo
 
-  find "$DIR" -type f -iname "*" | while read -r FILE; do
+  find "$DIR" -type f | while read -r FILE; do
     if [[ "$PREVIEW" == true ]]; then
       echo -e "$FILE ${GREEN}-->${RESET} $TO_DIR"
     else
@@ -156,7 +157,7 @@ main() {
     single_file "$2" "$3" "$PREVIEW"
     ;;
   "-ma" | "--move-all")
-    move_all "$2" "$3"
+    move_all "$2" "$3" "$PREVIEW"
     ;;
   "-pa" | "--preview-all")
     preview_all "$2" "$3"
@@ -168,7 +169,8 @@ main() {
     preview_mult "$2" "$3" "$4"
     ;;
   *)
-    echo "${RED}Error: $FLAG is not a valid flag...${RESET}"
+    echo
+    echo -e "${RED}Error: $FLAG is not a valid flag...${RESET}"
     ;;
   esac
 
