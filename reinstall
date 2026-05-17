@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# reinstall script
+# Author: jcolours
+# Date: 2026-05-16
+# Description: Script to ease reinstall process as it gets
+# annoying quick to run remove and then install
+
+echo
+echo "Remove:"
+sudo ./remove
+echo
+
+echo "Install:"
+sudo ./install
+
+exit 0

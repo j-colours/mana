@@ -143,6 +143,14 @@ preview_all() {
   move_all "$DIR" "$TO_DIR" "$PREVIEW"
 }
 
+# Function Name: love2d_setup
+# Purpose: For game development using the love2d framework (lua) create the base files
+love2d_setup() {
+  # main.lua, conf.lua, ...
+  /usr/local/lib/mana/love2d/love2d_main.sh
+  /usr/local/lib/mana/love2d/love2d_conf.sh
+}
+
 # Function Name: main
 # Purpose: runs manager
 main() {
@@ -150,6 +158,9 @@ main() {
   PREVIEW=false
 
   case "$FLAG" in
+  "-ls" | "--love2d-setup")
+    love2d_setup
+    ;;
   "-m" | "--mult")
     mult_files "$2" "$3" "$4" "$PREVIEW"
     ;;

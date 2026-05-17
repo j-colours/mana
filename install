@@ -10,6 +10,17 @@ if [[ $EUID -ne 0 ]]; then # [[]] is safer and adds functionality compared to si
   exit 1 # failure status
 fi
 
-# logic down here
+if [ -d "/usr/local/lib/mana" ]; then
+  echo "Tool already installed on system..."
+  exit 0
+else
+  cp -vr "$(pwd)" /usr/local/lib/
+
+  chmod +x "/usr/local/lib/mana/mana.sh"
+
+  chmod -R +x "/usr/local/lib/mana/love2d/"
+
+  ln -sf /usr/local/lib/mana/mana.sh /usr/local/bin/mana
+fi
 
 exit 0 # success status

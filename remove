@@ -1,8 +1,20 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-# remove script 
-# Author: jcolours 
+# remove script
+# Author: jcolours
 # Date: 2026-05-10
-# Description: remove asset manager from system 
+# Description: remove asset manager from system
 
+if [ "$EUID" -ne 0 ]; then
+  echo "Please use sudo..."
+  exit 1
+fi
 
+echo "Removing tool..."
+
+rm -rf /usr/local/lib/mana
+rm -f /usr/local/bin/mana
+
+echo "Tool has been removed..."
+
+exit 0
